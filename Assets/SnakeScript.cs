@@ -6,7 +6,7 @@ using UnityEngine;
 public class SnakeScript : MonoBehaviour
 {
     public GameObject snake;
-    public float unitMoved = 0.1f;
+    public float unitMoved;
 
     private int dir;
 
