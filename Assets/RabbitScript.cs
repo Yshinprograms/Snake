@@ -23,7 +23,6 @@ public class RabbitScript : MonoBehaviour
         if (collision.gameObject.layer == 3)
         {
             respawn();
-            Debug.Log("Collided");
         }
     }
 
