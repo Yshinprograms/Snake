@@ -6,15 +6,22 @@ using UnityEngine;
 public class SnakeScript : MonoBehaviour
 {
     public GameObject snake;
+    public GameObject segment;
+    public GameObject rabbit;
     public float unitMoved;
+    public float speed = 5f;
 
     private int dir;
+    private List<Transform> segments;
 
     //1-4 represents up,right,down,left respectively
     //Set 2 as default because snake faces right at first
     void Start()
     {
         dir = 2;
+        RabbitScript.rabbitEaten += spawnSegment;
+        //Fill segments with the transforms of new spawned segments
+        segments = new List<Transform>();
     }
 
     void Update()
@@ -22,6 +29,16 @@ public class SnakeScript : MonoBehaviour
 
         findDir();
         move(dir);
+
+        for (int i = 1; i < segments.Count; i++)
+        {
+            segments[i].position = Vector3.Lerp(segments[i].position, segments[i - 1].position, speed * Time.deltaTime);
+        }
+
+        if (segments.Count > 0)
+        {
+            segments[0].position = Vector3.Lerp(segments[0].position, snake.transform.position, speed * Time.deltaTime);
+        }
     }
 
     private void findDir()
@@ -69,5 +86,12 @@ public class SnakeScript : MonoBehaviour
         {
             transform.position += Vector3.left * unitMoved * Time.deltaTime;
         }
+    }
+
+    private void spawnSegment()
+    {
+        GameObject newSeg = Instantiate(segment, snake.transform.position, Quaternion.identity);
+        segments.Add(newSeg.transform);
+        segment.SetActive(true);
     }
 }
