@@ -416,7 +416,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc740ddd04097f2479855c1fcc4cfd8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  segment: {fileID: 1086011070}
 --- !u!212 &1086011072
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -478,7 +477,7 @@ Transform:
   m_GameObject: {fileID: 1086011070}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.8441324, y: -0.039267763, z: -0.12678659}
+  m_LocalPosition: {x: 0.8441324, y: -5.58, z: -0.12678659}
   m_LocalScale: {x: 3.12, y: 3.12, z: 3.12}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -516,7 +515,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snake: {fileID: 2113963855}
-  unitMoved: 1.5
+  segment: {fileID: 1086011070}
+  rabbit: {fileID: 288437673}
+  unitMoved: 3
+  speed: 10
 --- !u!212 &2113963858
 SpriteRenderer:
   m_ObjectHideFlags: 0

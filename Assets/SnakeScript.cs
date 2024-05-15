@@ -10,6 +10,7 @@ public class SnakeScript : MonoBehaviour
     public GameObject rabbit;
     public float unitMoved;
     public float speed = 5f;
+    public float turnSpeed = 3f;
 
     private int dir;
     private List<Transform> segments;
@@ -24,20 +25,34 @@ public class SnakeScript : MonoBehaviour
         segments = new List<Transform>();
     }
 
+    //Add rotation of snake segments, follow head direction
+
     void Update()
     {
 
         findDir();
         move(dir);
+        segmentFollowing();
 
+    }
+
+    private void segmentFollowing()
+    {
         for (int i = 1; i < segments.Count; i++)
         {
-            segments[i].position = Vector3.Lerp(segments[i].position, segments[i - 1].position, speed * Time.deltaTime);
-        }
+            segments[i].position = 
+                Vector3.Lerp(segments[i].position, segments[i - 1].position, speed * Time.deltaTime);
+            segments[i].rotation =
+                Quaternion.Slerp(segments[i].rotation, segments[i - 1].rotation, turnSpeed * Time.deltaTime);
 
+        }
+        //we need to have the conditional >0 because the snake may not have any segment yet, so no segments[0] exists
         if (segments.Count > 0)
         {
-            segments[0].position = Vector3.Lerp(segments[0].position, snake.transform.position, speed * Time.deltaTime);
+            segments[0].position = 
+                Vector3.Lerp(segments[0].position, snake.transform.position, speed * Time.deltaTime);
+            segments[0].rotation = 
+                Quaternion.Slerp(segments[0].rotation, transform.rotation, turnSpeed * Time.deltaTime);
         }
     }
 
