@@ -8,9 +8,10 @@ public class SnakeScript : MonoBehaviour
     public GameObject snake;
     public GameObject segment;
     public GameObject rabbit;
-    public float unitMoved;
-    public float speed = 5f;
-    public float turnSpeed = 3f;
+    public float unitMoved = 5;
+    public float speed = 7f;
+    public float turnSpeed = 7f;
+    public static bool alive = true;
 
     private int dir;
     private List<Transform> segments;
@@ -29,10 +30,12 @@ public class SnakeScript : MonoBehaviour
 
     void Update()
     {
-
-        findDir();
-        move(dir);
-        segmentFollowing();
+        if (alive)
+        {
+            findDir();
+            move(dir);
+            segmentFollowing();
+        }
 
     }
 
@@ -83,6 +86,12 @@ public class SnakeScript : MonoBehaviour
         }
     }
 
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event
+        RabbitScript.rabbitEaten -= spawnSegment;
+    }
+
     private void move(int dir)
     {
         if (dir == 1)
@@ -109,4 +118,6 @@ public class SnakeScript : MonoBehaviour
         segments.Add(newSeg.transform);
         segment.SetActive(true);
     }
+
+
 }

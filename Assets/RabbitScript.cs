@@ -9,7 +9,7 @@ public class RabbitScript : MonoBehaviour
     public static event RabbitEaten rabbitEaten;
 
     private float xBoundary = 8.5f;
-    private float yBoundary = 5.5f;
+    private float yBoundary = 5f;
     // Start is called before the first frame update
     void Start()
     {
@@ -43,5 +43,11 @@ public class RabbitScript : MonoBehaviour
             );
 
         transform.position = newPosition;
+    }
+
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event
+        RabbitScript.rabbitEaten -= respawn;
     }
 }
