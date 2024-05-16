@@ -10,10 +10,14 @@ public class RabbitScript : MonoBehaviour
 
     private float xBoundary = 8.5f;
     private float yBoundary = 5f;
+    private AudioSource rabbitEatenSFX;
+
     // Start is called before the first frame update
     void Start()
     {
         rabbitEaten += respawn;
+        respawn();
+        rabbitEatenSFX = gameObject.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -31,7 +35,8 @@ public class RabbitScript : MonoBehaviour
             {
                 rabbitEaten();
             }
-     
+            //Play sound effect here
+            rabbitEatenSFX.Play();
         }
     }
 
